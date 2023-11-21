@@ -1,0 +1,1 @@
+-- DM SQL不支持使用para=>value这样的调用方式

@@ -23,11 +23,22 @@ BEGIN
         DBMS_OUTPUT.PUT_LINE (' $' || to_char (emp_recs(i).salary, 'FM999,990.00'));
     END LOOP;
 END;
+PROCEDURE modify_paycheck(emp_recs in emps_type) 
+IS 
+BEGIN
+    emp_recs.DELETE;
+    emp_recs.EXTEND;
+    emp_recs(1).first_name := 'first';
+END;
 BEGIN
     OPEN driver;
     FETCH driver BULK COLLECT INTO recs;
     
     CLOSE driver;
+    print_paycheck (recs);
+    DBMS_OUTPUT.PUT_LINE('Modify nested table');
+    modify_paycheck(recs);
+    DBMS_OUTPUT.PUT_LINE('Print nested table');
     print_paycheck (recs);
 END;
 /
